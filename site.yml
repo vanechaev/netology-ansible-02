@@ -63,7 +63,11 @@
       become_method: su
       ansible.builtin.yum:
         disable_gpg_check: true
-        name: vector-latest-1.x86_64.rpm
+        name: vector-0.29.1-1.x86_64.rpm
       notify: Start vector service
       tags:
         - vector
+    - name: Copy server configuration file
+      ansible.builtin.template:
+        src: vector.toml
+        dest: "/etc/vector/vector.toml"
